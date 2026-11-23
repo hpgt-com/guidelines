@@ -10,12 +10,8 @@ can, but this is a volunteer club project.
 
 - All changes to `main` go through a pull request (branch ruleset «Main protection»). Force push and deletion of `main`
   are blocked.
-- Required checks: `dependency-review` (no dependencies with known vulnerabilities) and `workflow-security` (zizmor),
-  plus CodeQL code scanning (high or higher blocks the merge).
+- Required checks: `dependency-review` and `workflow-security` (zizmor), plus CodeQL code scanning of the workflows
+  (high or higher blocks the merge).
 - Actions are pinned to commit SHAs and updated monthly by Dependabot, with a 7-day cooldown.
-- Workflows get read-only access by default; jobs ask for more only when they need it. `persist-credentials: false`
-  on every checkout.
-- Secrets live in GitHub environments limited to `main`, never in the code. `.gitignore` blocks `.env` and key files.
-- Secret scanning with push protection, Dependabot alerts and security updates are on.
-
-<!-- Beskriv det som er spesielt for dette repoet: hva som publiseres, hvor, med hvilke nøkler. -->
+- Workflows get read-only access by default, with `persist-credentials: false` on every checkout.
+- The repository holds Markdown only. It has no secrets, environments or deployments.
