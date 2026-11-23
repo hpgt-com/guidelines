@@ -39,9 +39,30 @@
 
 - [ ] Installasjon fra låsefil uten installasjonsskript (for npm: `npm ci --ignore-scripts`).
 - [ ] Signaturkontroll av pakkene i bygget (for npm: `npm audit signatures`).
-- [ ] Dependabot én gang i måneden, gruppert per økosystem, med `cooldown` på minst 7 dager.
-- [ ] Automatisk merge bare for patch og minor, og bare når alle påkrevde sjekker er grønne. Major-versjoner og
-      avhengigheter som endrer infrastruktur, merges manuelt.
+- [ ] Dependabot én gang i måneden, gruppert per økosystem, med `cooldown` på minst 7 dager for patch og minor og
+      30 dager for major. En versjon foreslås dermed først når den har vært ute så lenge.
+- [ ] Signaturkontroller som ikke kan kjøres (for eksempel for pakker installert under et alias), er beskrevet i
+      repoet med grunnen.
+
+### Automatisk merge
+
+Dependabot-oppdateringer merges automatisk når alle kriteriene er oppfylt:
+
+| Kriterium | Krav |
+|---|---|
+| Alder | Versjonen har vært ute minst så lenge som `cooldown` sier. |
+| Type | Patch eller minor. Major merges manuelt. |
+| Pakker | Ikke verktøy som publiserer eller endrer infrastruktur (for eksempel Wrangler og OpenTofu-providere). |
+| Sjekker | Alle påkrevde sjekker er grønne, også `dependency-review` og signaturkontrollen. |
+| Tester | Repoet har tester som fanger brudd på det som publiseres: bygg, ende-til-ende og tilgjengelighet. Uten slike tester merges bare GitHub Actions automatisk. |
+
+- [ ] Sikkerhetsoppdateringer fra Dependabot følger de samme kriteriene, men venter ikke på `cooldown`.
+- [ ] Arbeidsflyten slår på automatisk merge (`gh pr merge --auto`). Regelsettet avgjør når PR-en merges.
+- [ ] I repoer som publiserer ved push til `main`, slås automatisk merge på med et token fra en GitHub-app. En merge
+      med `GITHUB_TOKEN` starter ikke andre arbeidsflyter, så endringen ville ikke blitt publisert. Nøkkelen ligger
+      som Dependabot-secret, fordi arbeidsflyter fra Dependabot ikke får vanlige secrets.
+- [ ] Arbeidsflyten bruker `pull_request_target` og sjekker ikke ut koden, så den alltid kjører versjonen fra `main`
+      og aldri kode fra PR-en.
 
 ## Hemmeligheter
 
