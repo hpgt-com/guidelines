@@ -33,8 +33,8 @@ infra/
 | Jobb | Når | Hva |
 |---|---|---|
 | `check` | Alle endringer i `infra/` | `tofu fmt -check` og `tofu validate`, uten nøkler |
-| `plan` | Pull requests, før apply og ukentlig | `tofu plan -detailed-exitcode`, med resultatet i oppsummeringen |
-| `apply` | Merge til `main`, bare når planen har endringer | Krever godkjenning i et miljø som bare tillater `main` |
+| `plan` | Pull requests, før apply og ukentlig | `tofu plan -detailed-exitcode` med et token som bare kan lese, med resultatet i oppsummeringen |
+| `apply` | Merge til `main`, bare når planen har endringer | Kjører i et miljø som bare tillater `main`, med skrivetokenet. Krever godkjenning i miljøet der planen støtter det, ellers er merge med synlig plan godkjenningen |
 | `drift` | Ukentlig | Oppretter én issue når planen viser endringer |
 
 - Plan og apply kjører bare når en repovariabel (for eksempel `TOFU_ENABLED`) er satt, så repoet kan settes opp før

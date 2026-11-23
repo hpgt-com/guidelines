@@ -68,7 +68,10 @@ Dependabot-oppdateringer merges automatisk når alle kriteriene er oppfylt:
 
 - [ ] Ingen hemmeligheter i repoet. `.gitignore` stopper `.env` og nøkkelfiler.
 - [ ] Hemmeligheter ligger som secrets, og bare jobbene som trenger dem, får dem.
-- [ ] Endringer i produksjon (for eksempel apply av infrastruktur) kjører i et miljø med påkrevd godkjenning fra et
-      team og bare fra `main`.
+- [ ] Endringer i produksjon (for eksempel apply av infrastruktur) kjører i et miljø som bare tillater `main`, med
+      påkrevd godkjenning fra et team. Der planen ikke støtter godkjenning i miljøet (private repoer uten Enterprise),
+      er merge av pull requesten, med planen synlig, godkjenningen.
+- [ ] Tokenet som kan endre produksjon, ligger bare i miljøet. Jobber som kjører på branches og pull requests (for
+      eksempel `plan`), bruker et token som bare kan lese.
 - [ ] Tokens har minst mulig tilgang og utløpsdato, og en planlagt jobb varsler før de utløper.
 - [ ] Tjenestetokens eies av organisasjonen eller kontoen, ikke av en person, der tjenesten støtter det.
