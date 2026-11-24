@@ -1,4 +1,4 @@
-name: Link check
+name: Lenkesjekk
 
 # Finner døde lenker i Markdown-filene med lychee.
 #  - På pull requests: bare lenker innad i repoet, med ankere (raskt og stabilt).
