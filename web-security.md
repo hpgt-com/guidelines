@@ -11,9 +11,9 @@ For nettsider og serverløse endepunkter.
 - [ ] HSTS med `includeSubDomains`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`,
       `Cross-Origin-Opener-Policy` og `Cross-Origin-Resource-Policy`.
 - [ ] Rammer: `frame-ancestors 'none'` med mindre siden skal kunne bygges inn.
-- [ ] Rapporter om brudd (`report-uri` og `report-to`) går til et eget endepunkt som ikke lagrer personopplysninger.
 - [ ] Sider på verter som ikke kan sette hoder (for eksempel GitHub Pages), har hodene satt i en proxy foran, eller
       avviket er beskrevet i repoet. Slike sider har ikke skjemaer eller skript fra tredjeparter.
+- [ ] Rapporter om brudd (`report-uri` og `report-to`) går til et eget endepunkt som ikke lagrer personopplysninger.
 
 ## Kode i nettleseren
 
@@ -29,7 +29,7 @@ For nettsider og serverløse endepunkter.
 - [ ] Rate limiting per IP.
 - [ ] Svar mellomlagres når det går, så trafikk ikke går videre til andre tjenester.
 - [ ] Logger inneholder ikke IP, nettleserinfo, spørrestrenger eller innhold fra brukeren. Det gjelder også
-      plattformens egne logger for kall.
+      plattformens egne logger for kall (for eksempel logger for hvert kall til en Worker, med IP).
 - [ ] Ingen hemmeligheter i koden. Trengs de, ligger de som secrets i plattformen.
 - [ ] Kontaktinformasjon som sendes til andre tjenester (for eksempel i `User-Agent`), tilhører organisasjonen, ikke
       en person.

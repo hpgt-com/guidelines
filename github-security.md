@@ -5,7 +5,7 @@
 - [ ] Medlemmer har lesetilgang som standard. Skrivetilgang gis per repo til et team, ikke til enkeltpersoner.
 - [ ] Tilganger, `CODEOWNERS` og påkrevde godkjenninger i miljøer peker på team (for eksempel
       `@<org>/maintainers`), så nye medlemmer får tilgang ved å legges i teamet.
-- [ ] Medlemmer kan ikke lage repoer. Nye repoer lages fra malen av en eier.
+- [ ] Medlemmer kan ikke lage repoer. Nye repoer lages fra organisasjonens mal av en eier.
 - [ ] Actions må være låst til commit-SHA (organisasjonsinnstilling).
 - [ ] `GITHUB_TOKEN` har bare lesetilgang som standard, og arbeidsflyter kan ikke godkjenne pull requests.
 - [ ] Apper og integrasjoner har bare tilgang til repoene og rettighetene de trenger.
@@ -21,9 +21,11 @@
 - [ ] Påkrevde sjekker: bygg eller test, `dependency-review` og `workflow-security` (zizmor).
 - [ ] CodeQL-funn med høy alvorlighet eller mer stopper merge.
 - [ ] Når en påkrevd jobb får nytt navn, oppdateres regelsettet i samme operasjon som merge.
-- [ ] Unntak fra regelsettet gis bare til apper, ikke til personer. Et innholdsverktøy (CMS) som committer rett til
-      `main`, får unntak bare når det ikke kan bruke pull requests, og unntaket er beskrevet i `docs/security.md` med
-      hvilke mapper verktøyet skriver til.
+- [ ] Unntak fra regelsettet gis bare til apper, ikke til personer, og bare når appen ikke kan bruke pull requests
+      (for eksempel et innholdsverktøy (CMS) som committer rett til `main`, eller en robot som må pushe). Unntaket og
+      grunnen er beskrevet i repoet, med hvilke mapper appen skriver til.
+- [ ] Eiere (rollen admin) kan omgå kravene bare gjennom en pull request (`bypass_mode: pull_request`), aldri med
+      direkte push. Det trengs for å kunne rette en påkrevd sjekk som selv er ødelagt, og brukes bare da.
 
 ## Arbeidsflyter
 
@@ -40,7 +42,9 @@
 - [ ] Installasjon fra låsefil uten installasjonsskript (for npm: `npm ci --ignore-scripts`).
 - [ ] Signaturkontroll av pakkene i bygget (for npm: `npm audit signatures`).
 - [ ] Dependabot én gang i måneden, gruppert per økosystem, med `cooldown` på minst 7 dager for patch og minor og
-      30 dager for major. En versjon foreslås dermed først når den har vært ute så lenge.
+      30 dager for major (`semver-major-days: 30`) der økosystemet støtter det. En versjon foreslås dermed først når den
+      har vært ute så lenge. Dependabot støtter ikke `semver-major-days` for blant annet `github-actions` og `opentofu`,
+      og avviser hele filen hvis nøkkelen står der.
 - [ ] Signaturkontroller som ikke kan kjøres (for eksempel for pakker installert under et alias), er beskrevet i
       repoet med grunnen.
 
@@ -52,7 +56,7 @@ Dependabot-oppdateringer merges automatisk når alle kriteriene er oppfylt:
 |---|---|
 | Alder | Versjonen har vært ute minst så lenge som `cooldown` sier. |
 | Type | Patch eller minor. Major merges manuelt. |
-| Pakker | Ikke verktøy som publiserer eller endrer infrastruktur (for eksempel Wrangler og OpenTofu-providere). |
+| Pakker | Ikke verktøy som publiserer eller endrer infrastruktur (for eksempel Wrangler og OpenTofu-providere). De merges manuelt. |
 | Sjekker | Alle påkrevde sjekker er grønne, også `dependency-review` og signaturkontrollen. |
 | Tester | Repoet har tester som fanger brudd på det som publiseres: bygg, ende-til-ende og tilgjengelighet. Uten slike tester merges bare GitHub Actions automatisk. |
 
