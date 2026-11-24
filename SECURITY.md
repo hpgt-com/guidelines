@@ -1,19 +1,21 @@
-# Security
+# Sikkerhet
 
-## Reporting a security issue
+## Rapportere et sikkerhetsproblem
 
-Do not open a public issue. Use **Report a vulnerability** under this repository's **Security** tab, so only the
-maintainers see the report. Describe what you found, how to reproduce it and what it affects. We reply as soon as we
-can, but this is a volunteer club project.
+Ikke opprett en offentlig issue. Bruk **Report a vulnerability** under fanen **Security** i dette repoet, så
+bare vedlikeholderne ser rapporten. Beskriv hva du fant, hvordan det kan gjenskapes, og hva det påvirker. Vi svarer
+så fort vi kan, men dette er et frivillig klubbprosjekt.
 
-## What is in place
+Rapporten kan skrives på norsk eller engelsk.
 
-- All changes to `main` go through a pull request (branch ruleset «Main protection»). Force push and deletion of `main`
-  are blocked.
-- Required checks: `dependency-review` and `workflow-security` (zizmor), plus CodeQL code scanning of the workflows
-  (high or higher blocks the merge).
-- Actions are pinned to commit SHAs and updated monthly by Dependabot, with a cooldown of 7 days (30 for major
-  versions). Patch and minor updates of Actions are merged automatically when all required checks pass
-  (`dependabot-automerge.yml`). Other updates are merged by hand.
-- Workflows get read-only access by default, with `persist-credentials: false` on every checkout.
-- The repository holds Markdown only. It has no secrets, environments or deployments.
+## Dette er på plass
+
+- Alle endringer på `main` går via pull request (regelsettet «Main protection»). Force push og sletting av `main` er
+  blokkert.
+- Påkrevde sjekker: `dependency-review` og `workflow-security` (zizmor), pluss kodeskanning med CodeQL av
+  arbeidsflytene (high eller høyere stopper merge).
+- Actions er låst til commit-SHA og oppdateres månedlig av Dependabot, med en ventetid på 7 dager (30 for hovedversjoner
+  der økosystemet støtter det). Patch- og minor-oppdateringer av Actions merges automatisk når alle påkrevde sjekker er
+  grønne (`dependabot-automerge.yml`). Andre oppdateringer merges for hånd.
+- Arbeidsflyter har bare lesetilgang som standard, med `persist-credentials: false` på hver checkout.
+- Repoet inneholder bare Markdown. Det har ingen hemmeligheter, miljøer eller publisering.
