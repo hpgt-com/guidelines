@@ -63,8 +63,9 @@ Dependabot-oppdateringer merges automatisk når alle kriteriene er oppfylt:
 - [ ] Sikkerhetsoppdateringer fra Dependabot følger de samme kriteriene, men venter ikke på `cooldown`.
 - [ ] Arbeidsflyten slår på automatisk merge (`gh pr merge --auto`). Regelsettet avgjør når PR-en merges.
 - [ ] I repoer som publiserer ved push til `main`, slås automatisk merge på med et token fra en GitHub-app. En merge
-      med `GITHUB_TOKEN` starter ikke andre arbeidsflyter, så endringen ville ikke blitt publisert. Nøkkelen ligger
-      som Dependabot-secret, fordi arbeidsflyter fra Dependabot ikke får vanlige secrets.
+      med `GITHUB_TOKEN` starter ikke andre arbeidsflyter, så endringen ville ikke blitt publisert. Nøkkelen ligger i
+      et miljø som bare tillater `main`, ikke som Dependabot-secret: med `pull_request_target` får jobben de vanlige
+      secretene, ikke Dependabot-secretene.
 - [ ] Arbeidsflyten bruker `pull_request_target` og sjekker ikke ut koden, så den alltid kjører versjonen fra `main`
       og aldri kode fra PR-en.
 
