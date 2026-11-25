@@ -56,7 +56,7 @@ Dependabot-oppdateringer merges automatisk når alle kriteriene er oppfylt:
 |---|---|
 | Alder | Versjonen har vært ute minst så lenge som `cooldown` sier. |
 | Type | Patch eller minor. Major merges manuelt. |
-| Pakker | Ikke verktøy som publiserer eller endrer infrastruktur (for eksempel Wrangler og OpenTofu-providere). De merges manuelt. |
+| Pakker | Ikke verktøy som endrer infrastruktur (for eksempel OpenTofu-providere). De merges manuelt. Verktøy som publiserer (for eksempel Wrangler), merges automatisk bare når en påkrevd sjekk bruker verktøyet uten å publisere (for eksempel `wrangler deploy --dry-run`). |
 | Sjekker | Alle påkrevde sjekker er grønne, også `dependency-review` og signaturkontrollen. |
 | Tester | Repoet har tester som fanger brudd på det som publiseres: bygg, ende-til-ende og tilgjengelighet. Uten slike tester merges bare GitHub Actions automatisk. |
 
